@@ -33,7 +33,7 @@ gem 'to_regexp'
 gem "devise"
 # Integrate devise with a CAS service (here we use OMB Max)
 # gem 'devise_cas_authenticatable'
-gem 'omniauth_login_dot_gov', :git => 'https://github.com/18f/omniauth_login_dot_gov.git', :ref => 'main'
+gem 'omniauth_login_dot_gov', :git => 'https://github.com/ctacdev/omniauth_login_dot_gov.git', :ref => '456ad85'
 
 # Tagging support
 gem 'acts-as-taggable-on'
@@ -101,7 +101,7 @@ group :development, :test do
   gem 'pry'
 
   # adds table data to model files, handy for tracking columns
-  gem 'annotate' #, :git => 'https://github.com/ctran/annotate_models.git'
+  gem 'annotate', :git => 'https://github.com/ctran/annotate_models.git'
 
   # open emails in browser on send
   gem 'letter_opener'
