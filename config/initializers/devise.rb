@@ -62,13 +62,14 @@ Devise.setup do |config|
   # config.cas_client_config_options = {
   #     logger: Rails.logger
   # }
+
   Rails.application.config.middleware.use OmniAuth::Builder do
     provider :login_dot_gov, {
       name: :login_dot_gov,
       client_id: ENV['REGISTRY_IDP_CLIENT_ID'], # same value as registered in the Partner Dashboard
       idp_base_url: ENV['REGISTRY_IDP'], # login.gov sandbox environment IdP
       ial: 1,
-      private_key: OpenSSL::PKey::RSA.new(ENV.fetch("LOGIN_GOV_PRIVATE_KEY").gsub("\\n", "\n")),
+      private_key: OpenSSL::PKey::RSA.new(File.read('config/private.pem')),
       redirect_uri: ENV['REGISTRY_LOGIN_REDIRECT'],
     }
   end
