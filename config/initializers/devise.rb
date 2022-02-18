@@ -45,7 +45,7 @@ Devise.setup do |config|
   # CAS, uncomment the following line.
   # config.cas_create_user = false
   # config.cas_username_column = :user
-  
+
   # You can enable Single Sign Out, which by default is disabled.
   # config.cas_enable_single_sign_out = true
 
@@ -62,14 +62,19 @@ Devise.setup do |config|
   # config.cas_client_config_options = {
   #     logger: Rails.logger
   # }
-  config.omniauth :login_dot_gov, {
-    name: :login_dot_gov,
-    client_id: ENV['REGISTRY_IDP_CLIENT_ID'], # same value as registered in the Partner Dashboard
-    idp_base_url: ENV['REGISTRY_IDP'], # login.gov sandbox environment IdP
-    ial: 1,
-    private_key: OpenSSL::PKey::RSA.new(File.read('config/private.pem')),
-    redirect_uri: ENV['REGISTRY_LOGIN_REDIRECT'],
-  }
+
+  Rails.application.config.middleware.use OmniAuth::Builder do
+    provider :login_dot_gov, {
+      name: :login_dot_gov,
+      client_id: ENV['REGISTRY_IDP_CLIENT_ID'], # same value as registered in the Partner Dashboard
+      idp_base_url: ENV['REGISTRY_IDP'], # login.gov sandbox environment IdP
+      ial: 1,
+      private_key: OpenSSL::PKey::RSA.new(File.read('config/private.pem')),
+      redirect_uri: ENV['REGISTRY_LOGIN_REDIRECT'],
+    }
+  end
+  OmniAuth.config.allowed_request_methods = %i[get post]
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
