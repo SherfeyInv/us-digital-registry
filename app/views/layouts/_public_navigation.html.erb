@@ -6,8 +6,6 @@
           <img class="logo-black" src="/assets/usdr-logo.png" alt="US DIGITAL REGISTRY" />
         </a>
       </em>
-      <p class="sub-head display-none">This is the description of the registry in short text</p>
-
     </div>
 
     <button class="usa-menu-btn"><i class="fas fa-bars"></i> Menu</button>
@@ -17,25 +15,6 @@
       <button class="usa-nav__close">
         <img src="/assets/uswds/img/close.svg" alt="close">
       </button>
-      <ul class="usa-nav__primary usa-accordion">
-          <li class="usa-nav__primary-item <%= "active" if request.path == "/" %>">
-            <a class="usa-nav__link" href="/"><span>US Digital Registry</span></a>
-          </li>
-            <li class="usa-nav__primary-item <%= "active" if request.path == "/federal-agencies" %>">
-            <a class="usa-nav__link" href="/federal-agencies"><span>Federal Agencies</span></a>
-          </li>
-            <li class="usa-nav__primary-item <%= "active" if request.path == "/developers" %>">
-            <a class="usa-nav__link" href="/developers"><span>Developers</span></a>
-          </li>
-      </ul><!-- .nav -->
-
-      <div class="usa-nav__secondary">
-        <ul class="usa-nav__secondary-links">
-          <li class="usa-nav__secondary-item">
-            <%= link_to "Federal Accounts Sign in with Login.gov", user_login_dot_gov_omniauth_authorize_path %>
-          </li>
-        </ul>
-      </div>
     </div>
   </nav>
 </header>

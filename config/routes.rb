@@ -228,198 +228,196 @@ Ringsail::Application.routes.draw do
   #######
   #### Admin Endpoints
   #######
-  concern :activity_and_history do
-    member do
-      get "history"
-      get "restore"
-    end
-    collection do
-      get "activities"
-    end
-  end
-  concern :publish_and_archive do
-    member do
-      get "publish"
-      get "request_publish"
-      get "archive"
-      get "request_archive"
-      get 'validate'
-    end
-  end
+  # concern :activity_and_history do
+  #   member do
+  #     get "history"
+  #     get "restore"
+  #   end
+  #   collection do
+  #     get "activities"
+  #   end
+  # end
+  # concern :publish_and_archive do
+  #   member do
+  #     get "publish"
+  #     get "request_publish"
+  #     get "archive"
+  #     get "request_archive"
+  #     get 'validate'
+  #   end
+  # end
 
-  namespace :admin do
-    resources :related_policies
-    resources :review_social_media do
-        member do
-            get 'publish'
-            get 'validate'
-            get 'archive'
-        end
-    end
+  # namespace :admin do
+  #   resources :related_policies
+  #   resources :review_social_media do
+  #       member do
+  #           get 'publish'
+  #           get 'validate'
+  #           get 'archive'
+  #       end
+  #   end
 
-    resources :review_mobile_apps do
-        member do
-            get 'publish'
-            get 'validate'
-            get 'archive'
-        end
-    end
+  #   resources :review_mobile_apps do
+  #       member do
+  #           get 'publish'
+  #           get 'validate'
+  #           get 'archive'
+  #       end
+  #   end
 
-    resources :agencies, concerns: :activity_and_history do
-      collection do
-        get 'tokeninput'
-      end
-      member do
-        get 'reassign'
-        get 'stats'
-      end
-    end
-    resources :official_tags, concerns: :activity_and_history do
-      collection do
-        get 'tokeninput'
-      end
-    end
-    resources :social_media, as: :outlets,
-      concerns: [:activity_and_history, :publish_and_archive] do
-      collection do
-        post "social_media_export"
-        get "social_media_import"
-        post "bulk_social_media_upload"
-        get "datatables"
-        get "account_for_url"
-      end
-    end
+  #   resources :agencies, concerns: :activity_and_history do
+  #     collection do
+  #       get 'tokeninput'
+  #     end
+  #     member do
+  #       get 'reassign'
+  #       get 'stats'
+  #     end
+  #   end
+  #   resources :official_tags, concerns: :activity_and_history do
+  #     collection do
+  #       get 'tokeninput'
+  #     end
+  #   end
+  #   resources :social_media, as: :outlets,
+  #     concerns: [:activity_and_history, :publish_and_archive] do
+  #     collection do
+  #       post "social_media_export"
+  #       get "social_media_import"
+  #       post "bulk_social_media_upload"
+  #       get "datatables"
+  #       get "account_for_url"
+  #     end
+  #   end
 
-    resources :mobile_apps,
-      concerns: [:activity_and_history, :publish_and_archive] do
-      collection do
-        post "mobile_apps_export"
-        get "datatables"
-        get "version_details_for_url"
-      end
-    end
-    resources :galleries,
-      concerns: [:activity_and_history, :publish_and_archive] do
-      collection do
-        post "galleries_export"
-      end
-    end
-    resources :users do
-      collection do
-        get 'tokeninput'
-       
-      end
-      resources :notifications, only: [:index, :show, :destroy] do
-        collection do
-          get 'destroy_all'
-          delete 'destroy_all'
-          post "admin_users_export"
-        end
-      end
-      member do
-        get 'edit_notification_settings'
-        # accept patch/put for update_notifications
-        put 'update_notification_settings'
-        patch 'update_notification_settings'
-        post "activate"
-        post "deactivate"
-      end
-    end
-    resources :email_messages
-    resources :services, :path => "platform", except: [:destroy] do
-      member do
-        get 'archive'
-        get 'restore'
-      end
-    end
+  #   resources :mobile_apps,
+  #     concerns: [:activity_and_history, :publish_and_archive] do
+  #     collection do
+  #       post "mobile_apps_export"
+  #       get "datatables"
+  #       get "version_details_for_url"
+  #     end
+  #   end
+  #   resources :galleries,
+  #     concerns: [:activity_and_history, :publish_and_archive] do
+  #     collection do
+  #       post "galleries_export"
+  #     end
+  #   end
+  #   resources :users do
+  #     collection do
+  #       get 'tokeninput'
 
-    # in a development environment, allow
-    # use of impersonation
-    if Rails.env.development?
-      get 'impersonate' => 'admin#impersonate'
-    end
-    get 'dashboards' => "dashboards#index"
-    get '/' => 'dashboards#index'
-  end
+  #     end
+  #     resources :notifications, only: [:index, :show, :destroy] do
+  #       collection do
+  #         get 'destroy_all'
+  #         delete 'destroy_all'
+  #         post "admin_users_export"
+  #       end
+  #     end
+  #     member do
+  #       get 'edit_notification_settings'
+  #       # accept patch/put for update_notifications
+  #       put 'update_notification_settings'
+  #       patch 'update_notification_settings'
+  #       post "activate"
+  #       post "deactivate"
+  #     end
+  #   end
+  #   resources :email_messages
+  #   resources :services, :path => "platform", except: [:destroy] do
+  #     member do
+  #       get 'archive'
+  #       get 'restore'
+  #     end
+  #   end
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  #   # in a development environment, allow
+  #   # use of impersonation
+  #   if Rails.env.development?
+  #     get 'impersonate' => 'admin#impersonate'
+  #   end
+  #   get 'dashboards' => "dashboards#index"
+  #   get '/' => 'dashboards#index'
+  # end
 
-	devise_scope :user do
-		get 'sign_out', :to => 'users/sessions#destroy', :as => :destroy_user_session
-	end
+  # devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-
+	# devise_scope :user do
+	# 	get 'sign_out', :to => 'users/sessions#destroy', :as => :destroy_user_session
+	# end
 
 
 
   #######
   #### API ENDPOINTS
   #######
-  namespace :digital_registry, path: 'digital-registry', defaults: {format: :json} do
-    namespace :v1 do
-      resources :agencies, only: [:index, :show]
-      resources :social_media, only: [:index, :show] do
-        collection do
-          get 'verify'
-          get 'services'
-          get 'tokeninput'
-          get 'archived'
-        end
-      end
-      # resources :galleries, only: [:index, :show]
-      resources :mobile_apps, only: [:index, :show] do
-        collection do
-          get 'tokeninput'
-        end
-      end
-      resources :government_urls, only: [:index, :show]
-      
-      resources :tags, only: [:index, :show] do
-        collection do
-          get 'types'
-        end
-      end
-      resources :multi, only: [:index, :show] do
-        collection do
-          get 'autocomplete'
-          get 'tokeninput'
-        end
-      end
-      resources :agencies, only: [:index, :show]
-    end
-  end
+  # namespace :digital_registry, path: 'digital-registry', defaults: {format: :json} do
+  #   namespace :v1 do
+  #     resources :agencies, only: [:index, :show]
+  #     resources :social_media, only: [:index, :show] do
+  #       collection do
+  #         get 'verify'
+  #         get 'services'
+  #         get 'tokeninput'
+  #         get 'archived'
+  #       end
+  #     end
+  #     # resources :galleries, only: [:index, :show]
+  #     resources :mobile_apps, only: [:index, :show] do
+  #       collection do
+  #         get 'tokeninput'
+  #       end
+  #     end
+  #     resources :government_urls, only: [:index, :show]
 
-   namespace :digital_registry, path:'api', defaults: {format: :json} do
-    namespace :v1 do
-      resources :agencies, only: [:index, :show]
-      resources :social_media, only: [:index, :show] do
-        collection do
-          get 'verify'
-          get 'services'
-          get 'tokeninput'
-          get 'archived'
-        end
-      end
-      # resources :galleries, only: [:index, :show]
-      resources :mobile_apps, only: [:index, :show] do
-        collection do
-          get 'tokeninput'
-        end
-      end
-      resources :tags, only: [:index, :show] do
-        collection do
-          get 'types'
-        end
-      end
-      resources :multi, only: [:index, :show] do
-        collection do
-          get 'autocomplete'
-          get 'tokeninput'
-        end
-      end
-      resources :agencies, only: [:index, :show]
-    end
-  end
+  #     resources :tags, only: [:index, :show] do
+  #       collection do
+  #         get 'types'
+  #       end
+  #     end
+  #     resources :multi, only: [:index, :show] do
+  #       collection do
+  #         get 'autocomplete'
+  #         get 'tokeninput'
+  #       end
+  #     end
+  #     resources :agencies, only: [:index, :show]
+  #   end
+  # end
+
+  #  namespace :digital_registry, path:'api', defaults: {format: :json} do
+  #   namespace :v1 do
+  #     resources :agencies, only: [:index, :show]
+  #     resources :social_media, only: [:index, :show] do
+  #       collection do
+  #         get 'verify'
+  #         get 'services'
+  #         get 'tokeninput'
+  #         get 'archived'
+  #       end
+  #     end
+  #     # resources :galleries, only: [:index, :show]
+  #     resources :mobile_apps, only: [:index, :show] do
+  #       collection do
+  #         get 'tokeninput'
+  #       end
+  #     end
+  #     resources :tags, only: [:index, :show] do
+  #       collection do
+  #         get 'types'
+  #       end
+  #     end
+  #     resources :multi, only: [:index, :show] do
+  #       collection do
+  #         get 'autocomplete'
+  #         get 'tokeninput'
+  #       end
+  #     end
+  #     resources :agencies, only: [:index, :show]
+  #   end
+  # end
 
 
   get '/uswds/img/:file_name.:format', to: redirect("/assets/uswds/img/%{file_name}.%{format}")
@@ -430,6 +428,5 @@ Ringsail::Application.routes.draw do
   get 'federal-agencies' => "public/home#federalagencies"
   get 'developers' => "public/home#developers"
   root :to => "public/home#index"
-
 
 end
