@@ -50,7 +50,7 @@ gem 'unicorn'
 # generate fake data in tests & seeds files
 #gem 'faker'
 
-gem 'elasticsearch-model', '5.1.0'
+gem 'elasticsearch-model', '6.0.0'
 gem 'elasticsearch-rails', '5.1.0'
 ######
 # Assets / Assets related gems
