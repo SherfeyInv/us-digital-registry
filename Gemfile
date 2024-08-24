@@ -69,7 +69,7 @@ gem 'raphael-rails'
 gem "jqcloud-rails"
 # end remove old files
 
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 4.4.0'
 gem 'jquery-tokeninput-rails'
 gem "non-stupid-digest-assets"
 
