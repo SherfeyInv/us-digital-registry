@@ -36,7 +36,7 @@ gem "devise"
 gem 'omniauth_login_dot_gov', :git => 'https://github.com/ctacdev/omniauth_login_dot_gov.git', :ref => '456ad85'
 
 # Tagging support
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', '>= 12.0.0'
 
 # Pagination
 gem 'kaminari'
