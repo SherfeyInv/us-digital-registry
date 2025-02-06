@@ -84,7 +84,7 @@ group :development, :test do
 
   # testing gems
   gem 'rspec-rails', '~> 3.0'
-  gem 'factory_bot'
+  gem 'factory_bot', '>= 6.5.1'
   gem 'coveralls'
   gem "capybara" #feature specs
   gem 'database_cleaner'
