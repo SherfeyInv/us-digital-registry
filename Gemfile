@@ -83,7 +83,7 @@ gem "non-stupid-digest-assets"
 group :development, :test do
 
   # testing gems
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 8.0', '>= 8.0.0'
   gem 'factory_bot'
   gem 'coveralls'
   gem "capybara" #feature specs
