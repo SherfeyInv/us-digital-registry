@@ -42,7 +42,7 @@ gem 'acts-as-taggable-on'
 gem 'kaminari'
 
 # Rack CORS. Prevents need to do this in application controller, lets us do it for public directory
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', '>= 3.0.0', :require => 'rack/cors'
 
 # Unicorn app server for hosting purposes in dev environment. Will be replaced with phusion passenger in 'real' host
 gem 'unicorn'
