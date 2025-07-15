@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 #ruby ENV['RUBY_VERSION']
 
 # Rails
-gem 'rails', '5.2'
+gem 'rails', '7.1.0'
 
 # DB Connector
 gem 'mysql2', '0.4.10'
@@ -10,14 +10,14 @@ gem 'mysql2', '0.4.10'
 #social media platforms
 # remove these since we no longer are able to integrate directly smoothly
 gem 'twitter'
-gem "koala" #facebook
+gem "koala" , ">= 3.1.0" #facebook
 
 # Templates for generating JSON and other data output
 gem 'json'
-gem 'jbuilder'
+gem 'jbuilder', '>= 2.10.0'
 
 # Public activity
-gem 'public_activity'
+gem 'public_activity', '>= 2.0.0'
 
 # Makes nested forms easier
 gem 'cocoon'
@@ -30,7 +30,7 @@ gem "selectize-rails"
 gem 'to_regexp'
 
 # Devise does user authentication mechanisms for us
-gem "devise"
+gem "devise", ">= 4.7.2"
 # Integrate devise with a CAS service (here we use OMB Max)
 # gem 'devise_cas_authenticatable'
 gem 'omniauth_login_dot_gov', :git => 'https://github.com/ctacdev/omniauth_login_dot_gov.git', :ref => '456ad85'
@@ -39,10 +39,10 @@ gem 'omniauth_login_dot_gov', :git => 'https://github.com/ctacdev/omniauth_login
 gem 'acts-as-taggable-on'
 
 # Pagination
-gem 'kaminari'
+gem 'kaminari', '>= 1.2.0'
 
 # Rack CORS. Prevents need to do this in application controller, lets us do it for public directory
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', '>= 2.0.0', :require => 'rack/cors'
 
 # Unicorn app server for hosting purposes in dev environment. Will be replaced with phusion passenger in 'real' host
 gem 'unicorn'
@@ -50,7 +50,7 @@ gem 'unicorn'
 # generate fake data in tests & seeds files
 #gem 'faker'
 
-gem 'elasticsearch-model', '5.1.0'
+gem 'elasticsearch-model', '6.0.0'
 gem 'elasticsearch-rails', '5.1.0'
 ######
 # Assets / Assets related gems
@@ -60,18 +60,18 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
 end
-gem 'font-awesome-rails'
+gem 'font-awesome-rails', '>= 4.7.0.8'
 
 # can remove all of these if we get rid of the 
 gem 'bootstrap-sass', '~> 3.3.3'
-gem 'morrisjs-rails'
+gem 'morrisjs-rails', '>= 0.5.1.3'
 gem 'raphael-rails'
 gem "jqcloud-rails"
 # end remove old files
 
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 4.4.0'
 gem 'jquery-tokeninput-rails'
-gem "non-stupid-digest-assets"
+gem "non-stupid-digest-assets", ">= 1.0.10"
 
 ######
 # End Assets / Assets related gems
@@ -83,20 +83,20 @@ gem "non-stupid-digest-assets"
 group :development, :test do
 
   # testing gems
-  gem 'rspec-rails', '~> 3.0'
-  gem 'factory_bot'
+  gem 'rspec-rails', '~> 3.9', '>= 3.9.1'
+  gem 'factory_bot', '>= 5.1.2'
   gem 'coveralls'
-  gem "capybara" #feature specs
+  gem "capybara" , ">= 3.31.0" #feature specs
   gem 'database_cleaner'
   gem 'guard-rspec', require: false
 
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '>= 4.2.0'
   # generate fake data in tests & seeds files
   gem 'faker'
 
   # nice debug tools
   # gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
-  gem 'better_errors'
+  gem 'better_errors', '>= 2.6.0'
   gem 'binding_of_caller'
   gem 'pry'
 
@@ -104,7 +104,7 @@ group :development, :test do
   gem 'annotate', :git => 'https://github.com/ctran/annotate_models.git'
 
   # open emails in browser on send
-  gem 'letter_opener'
+  gem 'letter_opener', '>= 1.8.0'
 
   # Ruby style checking
   gem 'rubocop', require: false
