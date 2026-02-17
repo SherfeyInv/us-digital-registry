@@ -10,7 +10,7 @@ gem 'mysql2', '0.4.10'
 #social media platforms
 # remove these since we no longer are able to integrate directly smoothly
 gem 'twitter'
-gem "koala" #facebook
+gem "koala" , ">= 3.3.0" #facebook
 
 # Templates for generating JSON and other data output
 gem 'json'
@@ -50,7 +50,7 @@ gem 'unicorn'
 # generate fake data in tests & seeds files
 #gem 'faker'
 
-gem 'elasticsearch-model', '5.1.0'
+gem 'elasticsearch-model', '6.0.0'
 gem 'elasticsearch-rails', '5.1.0'
 ######
 # Assets / Assets related gems
